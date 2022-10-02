@@ -1,4 +1,5 @@
 "use strict";
+export const DPI = devicePixelRatio;
 export const TWO_PI = Math.PI*2;
 export const random = (min,max,bool)=> bool ? Math.floor(Math.random()*(max-min)+min): Math.random()*(max-min)+min;
 export const scale = (number, inMin, inMax, outMin, outMax)=>{

@@ -6,7 +6,7 @@ export class SnakeFood{
     constructor(x,y,size){
         this.position = {x: x, y: y};
         this.size = size || random(5,8);
-        this.color = `hsl(${random(0,360,true)} 100% 50%)`;
+        this.color = `hsl(0 100% ${random(30,60,true)}%)`;
     }
     render(ctx){
         ctx.beginPath();

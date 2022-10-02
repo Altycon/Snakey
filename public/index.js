@@ -1,7 +1,7 @@
 "use strict";
 
 import { userIsOnMobileDevice } from "./js/DeviceCheck.js";
-import { fixCanvas } from "./js/utilities.js";
+import { fixCanvas, DPI } from "./js/utilities.js";
 import { detectSwipe } from "./js/SwipeDetection.js";
 import { SnakeGame } from "./js/SnakeGame.js";
 
@@ -12,7 +12,7 @@ import { SnakeGame } from "./js/SnakeGame.js";
 // }
 
 
-const DPI = devicePixelRatio;
+
 let sg_canvas,sg_ctx;
 
 let GAME;
