@@ -5,12 +5,9 @@ import { fixCanvas, DPI } from "./js/utilities.js";
 import { detectSwipe } from "./js/SwipeDetection.js";
 import { SnakeGame } from "./js/SnakeGame.js";
 
-// if(userIsOnMobileDevice) {
-//     alert("You're on mobile!")
-// } else {
-//     alert("You're on desktop!");
-// }
-
+const removeModal = (ev)=>{
+    document.querySelector('.game-modal').classList.add('hide');
+}
 
 
 let sg_canvas,sg_ctx;
@@ -36,6 +33,7 @@ const moveSnackMobile = (element,direction)=>{
 }
 
 const Start = ()=>{
+    document.querySelector('.js-begin-game-btn').addEventListener('click',removeModal)
     sg_canvas = document.getElementById('GameDisplay');
     fixCanvas(sg_canvas, DPI);
     

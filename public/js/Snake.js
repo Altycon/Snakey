@@ -95,12 +95,13 @@ export class Snake{
             ctx.fill();
             ctx.stroke();
 
-            ctx.beginPath();
-            ctx.strokeStyle = 'yellow';
-            ctx.moveTo(this.position.x + (this.width*0.5), this.position.y + (this.height*0.5));
-            ctx.lineTo(segmant.x + (this.width*0.5), segmant.y + (this.height*0.5));
-            ctx.closePath();
-            ctx.stroke();
+            
+            // ctx.beginPath();
+            // ctx.strokeStyle = 'yellow';
+            // ctx.moveTo(this.position.x + (this.width*0.5), this.position.y + (this.height*0.5));
+            // ctx.lineTo(segmant.x + (this.width*0.5), segmant.y + (this.height*0.5));
+            // ctx.closePath();
+            // ctx.stroke();
         }
         // display head segmant
         ctx.beginPath();
