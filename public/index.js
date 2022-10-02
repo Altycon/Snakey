@@ -1,6 +1,6 @@
 "use strict";
 
-//import { userIsOnMobileDevice } from "./js/DeviceCheck.js";
+import { userIsOnMobileDevice } from "./js/DeviceCheck.js";
 import { fixCanvas } from "./js/utilities.js";
 import { detectSwipe } from "./js/SwipeDetection.js";
 import { SnakeGame } from "./js/SnakeGame.js";
@@ -44,8 +44,13 @@ const Start = ()=>{
     GAME = new SnakeGame(sg_ctx);
     console.log(GAME);
 
-    //window.addEventListener('keydown', moveSnake); 
-    detectSwipe('GameDisplay', moveSnackMobile)
+    if(userIsOnMobileDevice){
+        detectSwipe('GameDisplay', moveSnackMobile)
+    }else{
+        window.addEventListener('keydown', moveSnake); 
+    }
+    
+    
     
     animate();
 }
