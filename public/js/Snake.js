@@ -5,9 +5,9 @@ import { userIsOnMobileDevice } from "./DeviceCheck.js";
 
 let S_speed;
 if(userIsOnMobileDevice){
-    S_speed = 4 * DPI;
+    S_speed = 2 * DPI;
 }else{
-    S_speed = 4;
+    S_speed = 2;
 }
 export class Snake{
     constructor(x,y,width,height,color){
@@ -85,17 +85,20 @@ export class Snake{
     render(ctx){
         // display tail segmants
         const tail_length = this.tail.length - 1;
+        
+
         for(let i = tail_length; i >= 0; i--){
             const segmant = this.tail[i];
             ctx.beginPath();
             ctx.fillStyle = this.tail_color;
             ctx.strokeStyle = 'black';
+            ctx.lineWidth = 5;
             ctx.rect(segmant.x, segmant.y, this.width, this.height);
             //ctx.arc(segmant.x, segmant.y, this.width/2, 0, TWO_PI);
             ctx.fill();
             ctx.stroke();
 
-            
+
             // ctx.beginPath();
             // ctx.strokeStyle = 'yellow';
             // ctx.moveTo(this.position.x + (this.width*0.5), this.position.y + (this.height*0.5));
@@ -104,11 +107,16 @@ export class Snake{
             // ctx.stroke();
         }
         // display head segmant
+        
+        
+
         ctx.beginPath();
         ctx.fillStyle = this.color;
-        ctx.strokeStyle = 'black';
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 5;
         ctx.rect(this.position.x, this.position.y, this.width, this.height);
         ctx.fill();
         ctx.stroke();
+        
     }
 }

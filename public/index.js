@@ -5,15 +5,18 @@ import { fixCanvas, DPI } from "./js/utilities.js";
 import { detectSwipe } from "./js/SwipeDetection.js";
 import { SnakeGame } from "./js/SnakeGame.js";
 
-const removeModal = (ev)=>{
-    document.querySelector('.game-modal').classList.add('hide');
-}
+
 
 
 let sg_canvas,sg_ctx;
 
 let GAME;
 let snake_game_interval;
+
+const removeModal = (ev)=>{
+    document.querySelector('.game-modal').classList.add('hide');
+    animate();
+}
 
 const moveSnackMobile = (element,direction)=>{
     switch(direction){
@@ -50,7 +53,7 @@ const Start = ()=>{
     
     
     
-    animate();
+    // animate();
 }
 function moveSnake(ev){
     ev.preventDefault();
@@ -69,7 +72,11 @@ function moveSnake(ev){
             GAME.changeDirection({x: -1, y: 0});
             break;
         case 's':
-            GAME.stopSnake();
+            //GAME.stopSnake();
+            cancelAnimationFrame(snake_game_interval)
+            break;
+        case 'g':
+            snake_game_interval = requestAnimationFrame(animate)
             break;
         case 't':
             console.log(GAME.snake.tail);

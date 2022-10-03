@@ -41,11 +41,16 @@ body{
     width: 100vw;
     height: 100vh;
     /* border: 5px solid yellow; */
+    padding: 1rem;
 }
 .SnakeGame .display_container{
     width: 100%;
     height: 100%;
-    /* border: 3px solid yellow; */
+    border-radius: 10px;
+    box-shadow: -2px -2px 8px hsl(0 0% 100% / 0.5),
+    inset -2px -2px 8px hsl(0 0% 100% / 0.5),
+    2px 2px 8px hsl(0 0% 0% / 0.9),
+    inset 2px 2px 8px hsl(0 0% 0% / 0.9);
 }
 #GameDisplay{
     width: 100%;

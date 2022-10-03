@@ -9,10 +9,10 @@ let S_size,
     F_size;
 
 if(userIsOnMobileDevice){
-    S_size = 50;
-    F_size = S_size*0.5;
+    S_size = 80;
+    F_size = S_size*0.25;
 }else{
-    S_size = 10;
+    S_size = 40;
     F_size = S_size*0.5;
 }
 export class SnakeGame{

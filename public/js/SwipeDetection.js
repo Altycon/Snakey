@@ -9,7 +9,7 @@ export function detectSwipe(id, f) {
         endY: 0,
         minX: 30,   // min X swipe for horizontal swipe
         maxX: 30,   // max X difference for vertical swipe
-        minY: 50,   // min Y swipe for vertial swipe
+        minY: 30,   // min Y swipe for vertial swipe
         maxY: 60    // max Y difference for horizontal swipe
     },
         direction = null,
