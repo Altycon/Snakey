@@ -5,6 +5,7 @@ import { random } from "./utilities.js";
 import { SnakeFood } from "./SnakeFood.js";
 import { Snake } from "./Snake.js";
 import { Explosion } from "./Explosion.js";
+import { Lightning } from "./Lightning.js";
 
 let S_size,
     F_size;
@@ -28,13 +29,14 @@ export class SnakeGame{
             100, //random(-this.snake_size,this.height-this.snake_size),
             this.snake_size,this.snake_size,'limegreen');
         this.food = [];
-        this.food_count = 20;
+        this.food_count = 10;
         this.addFood(this.food_count);
-        //this.explosion = new Explosion(this.width*0.5,this.height*0.5);
         this.explosions = [];
+        this.lightning_strike = new Lightning(this.width/2, 0, this.height);
+        this.lightning_strike.strike();
     }
     addFood(n){
-        const margin = 100;
+        const margin = 100; 
         for(let i = 0; i < n; i++){
             const x = random(-margin,this.width-margin);
             const y = random(-margin,this.height-margin);
@@ -114,5 +116,7 @@ export class SnakeGame{
                 this.explosions[i].render(this.context);
             } 
         }
+
+        this.lightning_strike.render(this.context);
     }
 }
