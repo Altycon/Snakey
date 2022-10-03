@@ -9,6 +9,7 @@ export class Lightning{
         this.color = 'white';
         this.path = [];
         this.struck = false;
+        this.interval = 1;
     }
     strike(){
         
@@ -19,6 +20,27 @@ export class Lightning{
             this.path.push({x: x, y: y})
         }
         this.struck = true;
+    }
+    animate(ctx){
+        if(this.struck){
+            ctx.fillStyle = this.color;
+            ctx.strokeStyle = 'yellow';
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(this.start.x, this.start.y);
+            const len = this.path.length;
+            for(let i = 0; i < this.interval; i++){
+                const position = this.path[i];
+                ctx.lineTo(position.x, position.y);
+                //ctx.arc(position.x, position.y, 2, 0, TWO_PI);
+                //ctx.fill();
+                
+            }
+            ctx.stroke();
+            if(!(this.interval >= this.path.length)){
+                this.interval++;
+            }
+        }
     }
     render(ctx){
         if(this.struck){

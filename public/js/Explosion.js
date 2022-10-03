@@ -44,7 +44,7 @@ export class Explosion{
         }
         if(this.parts.length === 0){
             this.finished = true;
-            console.log('Explosion finished')
+            //console.log('Explosion finished')
         }
     }
     render(ctx){

@@ -32,6 +32,7 @@ export class SnakeGame{
         this.food_count = 10;
         this.addFood(this.food_count);
         this.explosions = [];
+        this.lightning_strike = null;
         this.lightning_strike = new Lightning(this.width/2, 0, this.height);
         this.lightning_strike.strike();
     }
@@ -64,11 +65,15 @@ export class SnakeGame{
                 //this.snake.segments++;
                 piece_of_food++;
 
+                this.lightning_strike = new Lightning(this.food[i].position.x, 0, this.height);
+                this.lightning_strike.strike();
                 this.explosions.push(new Explosion(this.food[i].position.x, this.food[i].position.y));
-                console.log(this.explosions)
+                
                 this.food.splice(i,1);
                 this.food = [];
                 this.addFood(this.food_count);
+
+                
                 // console.log('EATEN', 1 + `of ${this.food.length}`);
                 // console.log('Segmants', this.snake.segments)
                 // console.log('Path length', this.snake.path.length)
@@ -77,6 +82,7 @@ export class SnakeGame{
             }
         }
         this.snake.segments += piece_of_food;
+       
     }
     changeDirection(v){
         this.snake.velocity = v;
@@ -116,7 +122,10 @@ export class SnakeGame{
                 this.explosions[i].render(this.context);
             } 
         }
-
-        this.lightning_strike.render(this.context);
+        if(this.lightning_strike != null){
+            //this.lightning_strike.render(this.context);
+            this.lightning_strike.animate(this.context);
+        }
+        
     }
 }

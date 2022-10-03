@@ -60,16 +60,18 @@ export class Snake{
         // capture position
         this.path.push({x: this.position.x, y: this.position.y});
         
-       
+        /** NOTE --- Something with the tail index still messes up everything once in awhile
+         * and I don't know why...besides this weird implimentation.
+         */
         // add tail segmants
         for(let i = 0; i < this.segments; i++){
-            const index = (this.width*i)/this.speed;
+            const index = Math.floor((this.width*i)/this.speed);
             this.tail[i] = this.path[index];
             this.tail[i].index = (this.width*i);
         }
 
         // limit path length
-        const limit = Math.floor((this.width*this.segments)/this.speed);
+        const limit = Math.floor((this.width*this.segments)/this.speed) + 1;
         if(this.path.length > limit){
             this.path.shift();
         }
