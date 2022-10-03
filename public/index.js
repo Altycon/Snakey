@@ -82,10 +82,8 @@ function moveSnake(ev){
             console.log(GAME.snake.tail);
             break;
         case 'i':
-            GAME.snake.speed++;
+            console.log(GAME.explosion);
             break;
-        case 'd':
-            GAME.snake.speed--;
     }
 }
 function animate(){

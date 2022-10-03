@@ -4,6 +4,7 @@ import { userIsOnMobileDevice } from "./DeviceCheck.js";
 import { random } from "./utilities.js";
 import { SnakeFood } from "./SnakeFood.js";
 import { Snake } from "./Snake.js";
+import { Explosion } from "./Explosion.js";
 
 let S_size,
     F_size;
@@ -27,26 +28,44 @@ export class SnakeGame{
             100, //random(-this.snake_size,this.height-this.snake_size),
             this.snake_size,this.snake_size,'limegreen');
         this.food = [];
-        this.food_count = 10;
+        this.food_count = 20;
         this.addFood(this.food_count);
+        //this.explosion = new Explosion(this.width*0.5,this.height*0.5);
+        this.explosions = [];
     }
     addFood(n){
+        const margin = 100;
         for(let i = 0; i < n; i++){
+            const x = random(-margin,this.width-margin);
+            const y = random(-margin,this.height-margin);
+            const dx = (this.snake.position.x + this.snake.width) - x;
+            const dy = (this.snake.position.y + this.snake.height) - y;
+            const distance = Math.hypot(dx,dy);
+            if(distance < 100){
+                i--;
+                continue;
+            } 
             this.food[i] = new SnakeFood(
-                random(-this.snake_size,this.width-this.snake_size),
-                random(-this.snake_size,this.height-this.snake_size),
+                x,
+                y,
                 F_size);
         }
     }
     findFood(){
+        let piece_of_food = 0;
         const len = this.food.length -1;
         for(let i = len; i >= 0; i--){
             const dx = this.food[i].position.x - (this.snake.position.x + (this.snake.width*0.5));
             const dy = this.food[i].position.y - (this.snake.position.y + (this.snake.height*0.5));
             const distance = Math.hypot(dx,dy);
             if(distance < this.food[i].size + (this.snake.width*0.5)){
-                this.snake.segments++;
+                //this.snake.segments++;
+                piece_of_food++;
+
+                this.explosions.push(new Explosion(this.food[i].position.x, this.food[i].position.y));
+                console.log(this.explosions)
                 this.food.splice(i,1);
+                this.food = [];
                 this.addFood(this.food_count);
                 // console.log('EATEN', 1 + `of ${this.food.length}`);
                 // console.log('Segmants', this.snake.segments)
@@ -55,6 +74,7 @@ export class SnakeGame{
                 // console.log('Tail array before new is added', this.snake.tail)
             }
         }
+        this.snake.segments += piece_of_food;
     }
     changeDirection(v){
         this.snake.velocity = v;
@@ -64,14 +84,35 @@ export class SnakeGame{
     }
     update(){
         this.findFood();
+
+        if(this.explosions.length){
+            for(let i = this.explosions.length - 1; i >= 0; i--){
+                if(this.explosions[i].finished){
+                    this.explosions.splice(i,1);
+                }
+            }
+        }
+        
         this.snake.move(this.width,this.height)
     }
     render(){
+        //clear canvas
         this.context.clearRect(0,0,this.width,this.height);
 
+        
+        // food
         for(let i = this.food.length - 1; i >= 0; i--){
             this.food[i].render(this.context);
         }
+        // snake
         this.snake.render(this.context);
+
+        // explosions
+        if(this.explosions.length){
+            for(let i = this.explosions.length - 1; i >= 0; i--){
+                this.explosions[i].explode();
+                this.explosions[i].render(this.context);
+            } 
+        }
     }
 }
