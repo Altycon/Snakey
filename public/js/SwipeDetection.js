@@ -1,5 +1,7 @@
 "use strict";
 
+import { DPI } from "./utilities.js";
+
 export function detectSwipe(id, f) {
     
     let detect = {
@@ -7,10 +9,10 @@ export function detectSwipe(id, f) {
         startY: 0,
         endX: 0,
         endY: 0,
-        minX: 30,   // min X swipe for horizontal swipe
-        maxX: 30,   // max X difference for vertical swipe
-        minY: 30,   // min Y swipe for vertial swipe
-        maxY: 60    // max Y difference for horizontal swipe
+        minX: 30 * DPI,   // min X swipe for horizontal swipe
+        maxX: 30 * DPI,   // max X difference for vertical swipe
+        minY: 30 * DPI,   // min Y swipe for vertial swipe
+        maxY: 60 *DPI  // max Y difference for horizontal swipe
     },
         direction = null,
         element = document.getElementById(id);
